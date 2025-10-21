@@ -15,6 +15,17 @@ export const editJoke = async (joke) => {
 
 }
 
+export const deleteJoke = async (joke) => {
+    return fetch(`http://localhost:8088/jokes/${joke.id}`,{
+        method: "DELETE",
+        headers: {
+        "Content-Type": "application/json"    
+        },
+        body: JSON.stringify(joke)
+
+    })
+}
+
 
 
 export const saveJoke = async (userInput) => {

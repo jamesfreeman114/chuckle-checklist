@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { saveJoke, getAllJokes, editJoke } from "./services/jokeService"
+import { saveJoke, getAllJokes, editJoke, deleteJoke } from "./services/jokeService"
 import stevePic from "./assets/steve.png"
 
 import "./App.css"
@@ -67,7 +67,7 @@ export const App = () => {
                 </div>
                 <div className="joke-lists-container">
                   <div className="joke-list-container">
-                    <h2><span className="told-count">Told {toldJokes.length}</span></h2>
+                    <h2>Told <span className="told-count"> {toldJokes.length}</span></h2>
                     {toldJokes.map( joke => {
                     return (
                     <li className="joke-list-item" key={joke.id}>
@@ -79,14 +79,22 @@ export const App = () => {
                             joke.told = !joke.told
                             await editJoke(joke)
                             updateJokes()}}
-                        ><i className="fa-regular fa-face-smile" /></button>
+                        ><i className="fa-regular fa-face-smile" />
+                        </button>
+                        <button
+                          className="joke-list-action-delete"
+                          onClick ={ async () => {
+                            await deleteJoke(joke)
+                            updateJokes()}}
+                        ><i className="fa-solid fa-trash-can" />
+                        </button>
                       </div> 
                     </li>
                     )})}
 
                   </div>
                   <div className="joke-list-container">
-                    <h2><span className="untold-count">Untold {untoldJokes.length}</span></h2>
+                    <h2>Untold<span className="untold-count"> {untoldJokes.length}</span></h2>
                     {untoldJokes.map( joke => {
                     return (
                     <li className="joke-list-item" key={joke.id}>
@@ -98,7 +106,15 @@ export const App = () => {
                             joke.told = !joke.told
                             await editJoke(joke)
                             updateJokes()}}
-                        ><i className="fa-regular fa-face-meh" /></button>
+                        ><i className="fa-regular fa-face-meh" />
+                        </button>
+                        <button
+                          className="joke-list-action-delete"
+                          onClick ={ async () => {
+                            await deleteJoke(joke)
+                            updateJokes()}}
+                        ><i className="fa-solid fa-trash-can" />
+                        </button>
                       </div> 
                     </li>
                     )})}
