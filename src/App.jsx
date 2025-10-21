@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { saveJoke, getAllJokes } from "./services/jokeService"
+import { saveJoke, getAllJokes, editJoke } from "./services/jokeService"
 import stevePic from "./assets/steve.png"
 
 import "./App.css"
@@ -72,6 +72,15 @@ export const App = () => {
                     return (
                     <li className="joke-list-item" key={joke.id}>
                       <p className="joke-list-item-text">{joke.text}</p>
+                      <div>
+                        <button
+                          className="joke-list-action-toggle"
+                          onClick ={ async () => {
+                            joke.told = !joke.told
+                            await editJoke(joke)
+                            updateJokes()}}
+                        ><i className="fa-regular fa-face-smile" /></button>
+                      </div> 
                     </li>
                     )})}
 
@@ -82,6 +91,15 @@ export const App = () => {
                     return (
                     <li className="joke-list-item" key={joke.id}>
                       <p className="joke-list-item-text">{joke.text}</p>
+                      <div>
+                        <button
+                          className = "joke-list-action-toggle"
+                          onClick ={ async () => {
+                            joke.told = !joke.told
+                            await editJoke(joke)
+                            updateJokes()}}
+                        ><i className="fa-regular fa-face-meh" /></button>
+                      </div> 
                     </li>
                     )})}
 
