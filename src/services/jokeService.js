@@ -3,10 +3,10 @@ export const getAllJokes = () => {
 }
 
 export const editJoke = async (joke) => {
-    return fetch(`http://localhost:8088/jokes/${joke.id}`,{
+    return fetch(`http://localhost:8088/jokes/${joke.id}`, {
         method: "PUT",
         headers: {
-        "Content-Type": "application/json"    
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(joke)
     })
@@ -16,10 +16,10 @@ export const editJoke = async (joke) => {
 }
 
 export const deleteJoke = async (joke) => {
-    return fetch(`http://localhost:8088/jokes/${joke.id}`,{
+    return fetch(`http://localhost:8088/jokes/${joke.id}`, {
         method: "DELETE",
         headers: {
-        "Content-Type": "application/json"    
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(joke)
 
@@ -29,22 +29,14 @@ export const deleteJoke = async (joke) => {
 
 
 export const saveJoke = async (userInput) => {
-
-    const transientState = {
-    text: userInput,
-    told: false
+  await fetch('http://localhost:8088/jokes', {
+    method: 'POST',
+    headers: { 
+        'Content-Type': 'application/json'
+     },
+    body: JSON.stringify({ 
+        text: userInput, 
+        told: false })
+  })
 }
 
-
-    const postJoke = {
-        method: "POST",
-        headers: {
-        "Content-Type": "application/json"    
-        },
-        body: JSON.stringify(transientState)
-    }
-
-   
-
-    const response = await fetch(`http://localhost:8088/jokes`, postJoke)
-}
